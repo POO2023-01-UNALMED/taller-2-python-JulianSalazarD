@@ -22,14 +22,14 @@ class Motor:
     def cambiarRegistro(self,registro):
         self.registro = registro
     
-    def asignatTipo(self,tipo):
+    def asignarTipo(self,tipo):
         if tipo == "electrico" or tipo == "gasolina":
             self.tipo = tipo
 
 class Auto:
     #atributos
     cantidadCreados = 0
-    def __init__(self, marca, modelo, precio, asientos, motor, registro):
+    def __init__(self, modelo, precio, asientos, marca, motor, registro):
         self.marca = marca
         self.modelo = modelo
         self.precio = precio
@@ -43,9 +43,12 @@ class Auto:
         for asiento in self.asientos:
             if asiento != None:
                 n_asientos += 1
+        return n_asientos
 
     def verificarIntegridad(self):
         if self.registro == self.motor.registro:
             for asiento in self.asientos:
-                if asiento != None: return "Las piezas no son originales"
+                if asiento != None:
+                    if self.registro != asiento.registro: return "Las piezas no son originales"
         return "Auto original"
+        
